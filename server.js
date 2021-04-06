@@ -23,8 +23,9 @@ const errorHandler = require('./lib/error_handler')
 const auth = require('./lib/auth')
 
 // establish database connection
-mongoose.Promise = global.Promise
 mongoose.connect(`mongodb+srv://sam:${process.env.DB_PASSWORD}@cluster1.hyibd.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`, { useNewUrlParser: true }, { useUnifiedTopology: true })
+  .then(() => console.log('connected to Mongo'))
+  .catch(e => console.log("whoops, something went wrong: ", e))
 
 // instantiate express application object
 const app = express()
