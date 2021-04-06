@@ -2,8 +2,8 @@
 const express = require('express')
 const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
-const cors = require('cors')
 require("dotenv").config()
+const cors = require("cors")
 
 // require route files
 const exampleRoutes = require('./app/routes/example_routes')
@@ -23,7 +23,7 @@ const errorHandler = require('./lib/error_handler')
 const auth = require('./lib/auth')
 
 // establish database connection
-mongoose.connect(`mongodb+srv://sam:${process.env.DB_PASSWORD}@cluster1.hyibd.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`, { useNewUrlParser: true }, { useUnifiedTopology: true })
+mongoose.connect(`mongodb+srv://sam:${process.env.DB_PASSWORD}@cluster1.hyibd.mongodb.net/clinicaldatabase?retryWrites=true&w=majority`, { useNewUrlParser: true }, { useUnifiedTopology: true })
   .then(() => console.log('connected to Mongo'))
   .catch(e => console.log("whoops, something went wrong: ", e))
 
@@ -32,7 +32,7 @@ const app = express()
 
 // set CORS headers on response from this API using the `cors` NPM package
 // `CLIENT_ORIGIN` is an environment variable that will be set on Heroku
-app.use(cors())
+app.use(cors({ origin: ['http://samnoonhaider.com', 'http://localhost:7165'] }))
 
 // define port for API to run on
 const port = process.env.PORT || 4741
