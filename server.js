@@ -3,6 +3,7 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
 const cors = require('cors')
+require("dotenv").config()
 
 // require route files
 const exampleRoutes = require('./app/routes/example_routes')
@@ -16,16 +17,14 @@ const errorHandler = require('./lib/error_handler')
 
 // require database configuration logic
 // `db` will be the actual Mongo URI as a string
-const db = require('./config/db')
+// const db = require('./config/db')
 
 // require configured passport authentication middleware
 const auth = require('./lib/auth')
 
 // establish database connection
 mongoose.Promise = global.Promise
-mongoose.connect(db, {
-  useMongoClient: true
-})
+mongoose.connect(`mongodb+srv://sam:${process.env.DB_PASSWORD}@cluster1.hyibd.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`, { useNewUrlParser: true }, { useUnifiedTopology: true })
 
 // instantiate express application object
 const app = express()
