@@ -32,7 +32,7 @@ const app = express()
 
 // set CORS headers on response from this API using the `cors` NPM package
 // `CLIENT_ORIGIN` is an environment variable that will be set on Heroku
-app.use(cors({ origin: ['http://samnoonhaider.com', 'http://localhost:7165'] }))
+app.use(cors({ origin: [process.env.CLIENTORIGIN, 'http://localhost:7165'] }))
 
 // define port for API to run on
 const port = process.env.PORT || 4741
